@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Thermometre</h2>
+    </div>
+    <div class="main">
+      <section class="tabs-wrapper">
+				<div class="tabs-container">
+					<div class="tabs-block">
+            <form id="config" action="">
+              <div class="tabs">
+                <input type="radio" name="tabs" id="tab1" checked="checked" />
+                <label for="tab1">Wifi</label>
+                <div class="tab">
+                  <h2>Wifi</h2>
+                    <div class="form-group">
+                      <label for="wifi_ssid">SSID:</label>
+                      <input type="text" id="wifi_ssid" name="wifi.ssid" >
+                    </div>
+                    <div class="form-group">
+                      <label for="wifi_password">Password:</label>
+                      <input type="password" id="wifi_password" name="wifi.password" >
+                    </div>
+                </div>
+
+                <input type="radio" name="tabs" id="tab2" />
+                <label for="tab2">MQTT</label>
+                <div class="tab">
+                  <h2>MQTT</h2>
+                  <div class="form-group">
+                    <label for="mqtt_server">Server:</label>
+                    <input type="text" id="mqtt_server" name="mqtt.server" >
+                  </div>
+                  <div class="form-group">
+                    <label for="mqtt_port">Port:</label>
+                    <input type="number" id="mqtt_port" name="mqtt.port" >
+                  </div>
+                  <div class="form-group">
+                    <label for="mqtt_username">Username:</label>
+                    <input type="text" id="mqtt_username" name="mqtt.username" >
+                  </div>
+                  <div class="form-group">  
+                    <label for="mqtt_password">Password:</label>
+                    <input type="password" id="mqtt_password" name="mqtt.password" >
+                  </div>
+                  <div class="form-group">
+                    <label for="mqtt_topic">Topic:</label>
+                    <input type="text" id="mqtt_topic" name="mqtt.topic" >
+                  </div>
+                  <div class="form-group">
+                    <label for="mqtt_id">Client ID:</label>
+                    <input type="text" id="mqtt_id" name="mqtt.id" >
+                  </div>
+                </div>
+
+              </div>
+              <button type="submit" class="submit">Submit</button>
+            </form>
+          </div>
+				</div>
+			</section>
+    </div>
+  </div>
+</html>
