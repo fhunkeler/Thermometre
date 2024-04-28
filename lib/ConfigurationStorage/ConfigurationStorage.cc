@@ -11,7 +11,8 @@ ConfigurationStorage::ConfigurationStorage()
  */
 ConfigurationStorage::ConfigurationStorage(char *file)
 {
-  Serial.println("ConfigurationStorage::ConfigurationStorage()");
+  Serial.begin(115200);
+  Serial.println("ConfigurationStorage::ConfigurationStorage(" + String(file) + ")");
   configPath = file;
   if (LittleFS.begin() && LittleFS.exists(configPath))
   {
@@ -21,18 +22,16 @@ ConfigurationStorage::ConfigurationStorage(char *file)
       Serial.println("Failed to open configuration file");
       ESP.restart();
     }
-    size_t size = configFile.size();
-    std::unique_ptr<char[]> buf(new char[size]);
-    configFile.readBytes(buf.get(), size);
-    configFile.close();
 
-    DeserializationError error = deserializeJson(configDoc, buf.get());
+    DeserializationError error = deserializeJson(configDoc, configFile);
     if (error)
     {
       Serial.println("Failed to parse configuration file");
       ESP.restart();
     }
     Serial.println("Configuration file parsed");
+    // serializeJsonPretty(configDoc, Serial);
+    // Serial.println();
   }
   else
   {
@@ -42,53 +41,6 @@ ConfigurationStorage::ConfigurationStorage(char *file)
 }
 
 /**
- * @brief Start point for the configuration storage
- *
- * @return true
- * @return false
- */
-// bool ConfigurationStorage::begin()
-// {
-//   Serial.println("ConfigurationStorage::begin(): ");
-//   if (!LittleFS.begin())
-//   {
-//     Serial.println("LittleFS Mount Failed");
-//     return false;
-//   }
-
-//   if (!LittleFS.exists(configPath))
-//   {
-//     Serial.println("Configuration file does not exist");
-//     createConfigFile();
-//     return true;
-//   }
-//   File configFile = LittleFS.open(configPath, "r");
-//   if (!configFile)
-//   {
-//     Serial.println("Failed to open configuration file");
-//     return false;
-//   }
-//   size_t size = configFile.size();
-//   if (size > 1024)
-//   {
-//     Serial.println("Configuration file size is too large");
-//     return false;
-//   }
-//   std::unique_ptr<char[]> buf(new char[size]);
-//   configFile.readBytes(buf.get(), size);
-//   configFile.close();
-
-//   DeserializationError error = deserializeJson(configDoc, buf.get());
-//   if (error)
-//   {
-//     Serial.println("Failed to parse configuration file");
-//     return false;
-//   }
-//   Serial.println("Configuration file parsed");
-//   return true;
-// }
-
-/**
  * @brief Return the configuration document
  *
  * @return JsonDocument*
@@ -96,6 +48,7 @@ ConfigurationStorage::ConfigurationStorage(char *file)
 JsonDocument ConfigurationStorage::get()
 {
   Serial.println("ConfigurationStorage::get()");
+  serializeJsonPretty(configDoc, Serial);
   return configDoc;
 }
 
@@ -106,6 +59,7 @@ JsonDocument ConfigurationStorage::get()
  */
 bool ConfigurationStorage::set(JsonDocument doc)
 {
+  Serial.println("ConfigurationStorage::set()");
   configDoc = doc;
   return writeConfigFile();
 }
@@ -143,7 +97,7 @@ bool ConfigurationStorage::createConfigFile()
     Serial.println("LittleFS Mount Failed");
     return false;
   }
-  LittleFS.format();
+  // LittleFS.format();
   File configFile = LittleFS.open(configPath, "w");
   if (!configFile)
   {
@@ -159,9 +113,10 @@ bool ConfigurationStorage::createConfigFile()
   configDoc["mqtt"]["port"] = 1883;
   configDoc["mqtt"]["user"] = "user";
   configDoc["mqtt"]["password"] = "password";
-  configDoc["mqtt"]["id"] = 1883;
   configDoc["mqtt"]["topic"] = "topic";
   configDoc["mqtt"]["id"] = "thermometer_" + deviceId;
+  Serial.println("Configuration file created : ");
+  serializeJsonPretty(configDoc, Serial);
   serializeJson(configDoc, configFile);
   configFile.close();
   return true;
