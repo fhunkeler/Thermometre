@@ -14,5 +14,6 @@
     "string_view": "cpp",
     "initializer_list": "cpp",
     "ranges": "cpp"
-  }
+  },
+  "cmake.sourceDirectory": "/home/florent/Documents/PlatformIO/Projects/Thermometre/.pio/libdeps/d1_mini_lite/ArduinoJson/src"
 }

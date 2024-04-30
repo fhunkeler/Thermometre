@@ -250,7 +250,7 @@
                         <div class="tabs-block">
                             <form id="config" action="">
                                 <div class="tabs">
-                                    <input type="hidden" name="firstBoot" value="False" /> <input type="radio" name="tabs" id="tab1" checked="checked" /> <label for="tab1">Wifi</label>
+                                    <input type="hidden" name="first_boot" value="False" /> <input type="radio" name="tabs" id="tab1" checked="checked" /> <label for="tab1">Wifi</label>
                                     <div class="tab">
                                         <h2>Wifi</h2>
                                         <div class="form-group"><label for="wifi_ssid">SSID:</label> <input type="text" id="wifi_ssid" name="wifi.ssid" /></div>
@@ -289,25 +289,10 @@
           </div>
         </div>
         <script defer>
-            /**
-             * Post data
-             **/
             async function sendData(data) {
             try {
                 console.log("Send Data", data);
-                const res = await fetch("/api/config", 
-                { 
-                    method: "POST", 
-                    headers: { "Content-Type": "application/json" }, 
-                    body: JSON.stringify(data) 
-                });
-                if (!res.ok) {
-                    const error = document.querySelector("#error");
-                    error.classList.remove("hidden");
-                    error.insertAdjacentHTML('afterbegin', "<div>Saving configuration error</div>")
-                    const body = document.querySelector("#overlay");
-                    body.classList.remove("hidden");
-                }
+                await fetch("/api/config", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
             } catch (e) {
                 console.log(e)
                 const error = document.querySelector("#error");
@@ -318,7 +303,7 @@
             }
                 
             }
-            async function handleSubmits(e) {
+            function handleSubmits(e) {
                 e.preventDefault();
                 const form = e.target;
                 const formData = new FormData(form);
@@ -340,15 +325,11 @@
                     }
                     return acc;
                 }, {});
-                data["firstBoot"] = false;
-                await sendData(data);
+                data["first_boot"] = false;
+                sendData(data);
             }
             const form = document.querySelector("#config");
             form.addEventListener("submit", handleSubmits);
-            
-            /**
-             * Get Data
-             **/
             const getConfig = async (event) => {
                 try {
                     console.log("get Config");
@@ -379,10 +360,6 @@
 
             };
             window.addEventListener("load", getConfig);
-            
-            /**
-             * Show password
-             **/
             const showPassword = (e) => {
                 e.preventDefault();
                 const input = e.target.previousElementSibling;

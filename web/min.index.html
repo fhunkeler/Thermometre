@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link
+            rel="shortcut icon"
+            href="data:image/x-icon;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJpb25pY29uIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZD0iTTMwNy43MiAzMDIuMjdhOCA4IDAgMDEtMy43Mi02Ljc1VjgwYTQ4IDQ4IDAgMDAtNDgtNDhoMGE0OCA0OCAwIDAwLTQ4IDQ4djIxNS41MmE4IDggMCAwMS0zLjcxIDYuNzQgOTcuNTEgOTcuNTEgMCAwMC00NC4xOSA4Ni4wN0E5NiA5NiAwIDAwMzUyIDM4NGE5Ny40OSA5Ny40OSAwIDAwLTQ0LjI4LTgxLjczek0yNTYgMTEydjI3MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjMyIi8+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMzg0IiByPSI0OCIvPjwvc3ZnPg=="
+        />
+        <title>Thermometre - configuration</title>
+        <style>
+            html{font-size:calc(1em * 0.625)}body{margin:0;min-height:100vh;height:100%;width:100%;font-family:"Trebuchet MS","Lucida Sans Unicode","Lucida Grande","Lucida Sans",Arial,sans-serif;font-size:1.6rem;line-height:1.5;color:#333;background-color:#f4f4f4}.container{margin:0 auto}.header{background-color:#333;color:#fff;padding:1rem;text-align:center}.main{padding:1rem}.password{display:flex;flex:1 1 100%;position:relative}.password > input{flex-grow:1}.password > button{border:none;cursor:pointer;background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJpb25pY29uIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZD0iTTQzMiA0NDhhMTUuOTIgMTUuOTIgMCAwMS0xMS4zMS00LjY5bC0zNTItMzUyYTE2IDE2IDAgMDEyMi42Mi0yMi42MmwzNTIgMzUyQTE2IDE2IDAgMDE0MzIgNDQ4ek0yNTUuNjYgMzg0Yy00MS40OSAwLTgxLjUtMTIuMjgtMTE4LjkyLTM2LjUtMzQuMDctMjItNjQuNzQtNTMuNTEtODguNy05MXYtLjA4YzE5Ljk0LTI4LjU3IDQxLjc4LTUyLjczIDY1LjI0LTcyLjIxYTIgMiAwIDAwLjE0LTIuOTRMOTMuNSAxNjEuMzhhMiAyIDAgMDAtMi43MS0uMTJjLTI0LjkyIDIxLTQ4LjA1IDQ2Ljc2LTY5LjA4IDc2LjkyYTMxLjkyIDMxLjkyIDAgMDAtLjY0IDM1LjU0YzI2LjQxIDQxLjMzIDYwLjQgNzYuMTQgOTguMjggMTAwLjY1QzE2MiA0MDIgMjA3LjkgNDE2IDI1NS42NiA0MTZhMjM5LjEzIDIzOS4xMyAwIDAwNzUuOC0xMi41OCAyIDIgMCAwMC43Ny0zLjMxbC0yMS41OC0yMS41OGE0IDQgMCAwMC0zLjgzLTEgMjA0LjggMjA0LjggMCAwMS01MS4xNiA2LjQ3ek00OTAuODQgMjM4LjZjLTI2LjQ2LTQwLjkyLTYwLjc5LTc1LjY4LTk5LjI3LTEwMC41M0MzNDkgMTEwLjU1IDMwMiA5NiAyNTUuNjYgOTZhMjI3LjM0IDIyNy4zNCAwIDAwLTc0Ljg5IDEyLjgzIDIgMiAwIDAwLS43NSAzLjMxbDIxLjU1IDIxLjU1YTQgNCAwIDAwMy44OCAxIDE5Mi44MiAxOTIuODIgMCAwMTUwLjIxLTYuNjljNDAuNjkgMCA4MC41OCAxMi40MyAxMTguNTUgMzcgMzQuNzEgMjIuNCA2NS43NCA1My44OCA4OS43NiA5MWEuMTMuMTMgMCAwMTAgLjE2IDMxMC43MiAzMTAuNzIgMCAwMS02NC4xMiA3Mi43MyAyIDIgMCAwMC0uMTUgMi45NWwxOS45IDE5Ljg5YTIgMiAwIDAwMi43LjEzIDM0My40OSAzNDMuNDkgMCAwMDY4LjY0LTc4LjQ4IDMyLjIgMzIuMiAwIDAwLS4xLTM0Ljc4eiIvPjxwYXRoIGQ9Ik0yNTYgMTYwYTk1Ljg4IDk1Ljg4IDAgMDAtMjEuMzcgMi40IDIgMiAwIDAwLTEgMy4zOGwxMTIuNTkgMTEyLjU2YTIgMiAwIDAwMy4zOC0xQTk2IDk2IDAgMDAyNTYgMTYwek0xNjUuNzggMjMzLjY2YTIgMiAwIDAwLTMuMzggMSA5NiA5NiAwIDAwMTE1IDExNSAyIDIgMCAwMDEtMy4zOHoiLz48L3N2Zz4=);appearance:none;background-color:inherit;background-repeat:no-repeat;background-attachment:scroll;background-position:center center;background-size:24px;width:24px;height:24px;position:absolute;top:50%;right:10px;transform:translateY(-50%)}.password > button.show{background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJpb25pY29uIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZD0iTTI1NS42NiAxMTJjLTc3Ljk0IDAtMTU3Ljg5IDQ1LjExLTIyMC44MyAxMzUuMzNhMTYgMTYgMCAwMC0uMjcgMTcuNzdDODIuOTIgMzQwLjggMTYxLjggNDAwIDI1NS42NiA0MDBjOTIuODQgMCAxNzMuMzQtNTkuMzggMjIxLjc5LTEzNS4yNWExNi4xNCAxNi4xNCAwIDAwMC0xNy40N0M0MjguODkgMTcyLjI4IDM0Ny44IDExMiAyNTUuNjYgMTEyeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIzMiIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMzIiLz48L3N2Zz4=)}.tabs-container{padding:2rem}.tabs-block{display:flex;align-items:center;justify-content:center}.tabs{display:flex;flex-wrap:wrap;width:100%}.tabs > label{width:100%;display:flex;align-items:center;justify-content:center;padding:1rem 2rem;margin-right:.0625rem;cursor:pointer;background-color:#333;color:#fff;font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;font-size:1.2rem;font-weight:700;transition:background-color ease .3s}.tabs .tab{flex-grow:1;width:100%;height:100%;display:none;padding:1rem 2rem;color:#333;background-color:#fff;box-shadow:0 10px 10px rgba(0,0,0,0.4)}.tabs .tab > :not(:last-child){margin-bottom:.8rem}.tabs [type="radio"]{display:none}.tabs [type="radio"]:checked + label{background-color:#fff;color:#0067b8;border-top:4px solid #0067b8;box-shadow:0 10px 10px rgba(0,0,0,0.4)}.tabs [type="radio"]:checked + label + .tab{display:block}@media (min-width: 768px){body{font-size:1.125rem}.tabs-container{padding:4rem}.tabs label{order:1;width:auto}.tabs .tab{order:9}.tabs [type="radio"]:checked + label{border-bottom:none}}@media (min-width: 992px){.tabs{width:800px}}.form-group{margin-bottom:1rem;display:flex;flex-direction:column-reverse;justify-content:center;position:relative}.form-group label{font-size:1.2rem;font-weight:700}.form-group input{padding:.5rem;font-size:1.2rem;border:1px solid #333;border-radius:5px}.submit{padding:.5rem 1rem;margin-top:2rem;font-size:1.6rem;background-color:#333;color:#fff;border:none;border-radius:5px;cursor:pointer;float:right}#overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.4rem}.hidden{display:none!important}.lds-ring{color:#fff}.lds-ring,.lds-ring div{box-sizing:border-box}.lds-ring{display:inline-block;position:relative;width:80px;height:80px}.lds-ring div{box-sizing:border-box;display:block;position:absolute;width:64px;height:64px;margin:8px;border:8px solid currentColor;border-radius:50%;animation:lds-ring 1.2s cubic-bezier(0.5,0,0.5,1) infinite;border-color:currentColor transparent transparent}.lds-ring div:nth-child(1){animation-delay:-.45s}.lds-ring div:nth-child(2){animation-delay:-.3s}.lds-ring div:nth-child(3){animation-delay:-.15s}@keyframes lds-ring{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.loading{display:flex;align-items:center;justify-content:center;flex-direction:column}.error{color:rgba(255,255,255,0.8);background:#9f0000;padding:10px;border-radius:5px;text-shadow:2px 8px 6px rgba(0,0,0,0.2),0 -5px 35px rgba(255,255,255,0.3)}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header"><h2>Thermometre - configuration</h2></div>
+            <div class="main">
+                <section class="tabs-wrapper">
+                    <div class="tabs-container">
+                        <div class="tabs-block">
+                            <form id="config" action="">
+                                <div class="tabs">
+                                    <input type="hidden" name="first_boot" value="False" /> <input type="radio" name="tabs" id="tab1" checked="checked" /> <label for="tab1">Wifi</label>
+                                    <div class="tab">
+                                        <h2>Wifi</h2>
+                                        <div class="form-group"><label for="wifi_ssid">SSID:</label> <input type="text" id="wifi_ssid" name="wifi.ssid" /></div>
+                                        <div class="form-group">
+                                            <label for="wifi_password">Password:</label>
+                                            <div class="password"><input type="password" id="wifi_password" name="wifi.password" /> <button class="show-password"></button></div>
+                                        </div>
+                                    </div>
+                                    <input type="radio" name="tabs" id="tab2" /> <label for="tab2">MQTT</label>
+                                    <div class="tab">
+                                        <h2>MQTT</h2>
+                                        <div class="form-group"><label for="mqtt_server">Server:</label> <input type="text" id="mqtt_server" name="mqtt.host" /></div>
+                                        <div class="form-group"><label for="mqtt_port">Port:</label> <input type="number" id="mqtt_port" name="mqtt.port" /></div>
+                                        <div class="form-group"><label for="mqtt_username">Username:</label> <input type="text" id="mqtt_username" name="mqtt.user" /></div>
+                                        <div class="form-group">
+                                            <label for="mqtt_password">Password:</label>
+                                            <div class="password"><input type="password" id="mqtt_password" name="mqtt.password" /> <button class="show-password"></button></div>
+                                        </div>
+                                        <div class="form-group"><label for="mqtt_topic">Topic:</label> <input type="text" id="mqtt_topic" name="mqtt.topic" /></div>
+                                        <div class="form-group"><label for="mqtt_id">Client ID:</label> <input type="text" id="mqtt_id" name="mqtt.id" /></div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="overlay" id="overlay">
+          <div id="loading" class="loading">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div>Loading...</div>
+          </div>
+          <div id="error" class="error hidden">
+            <div>Error loading configuration</div>
+          </div>
+        </div>
+        <script defer>
+            function sendData(a){console.log("Send Data",a),fetch("/api/config",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(a)})}function handleSubmits(a){a.preventDefault();const b=a.target,c=new FormData(b),d=Object.entries(Object.fromEntries(c)).reduce((a,[b,c])=>{if("tabs"!==b){const d=b.split(".");if(1===d.length)a[b]=c;else{let b=a;for(let a=0;a<d.length-1;a++)b[d[a]]||(b[d[a]]={}),b=b[d[a]];b[d[d.length-1]]=c}}return a},{});d.first_boot=!1,sendData(d)}const form=document.querySelector("#config");form.addEventListener("submit",handleSubmits);const getConfig=async()=>{try{console.log("get Config");const a=await fetch("/api/config",{headers:{"Content-type":"application/json","Cache-Control":"no-cache"}}),b=await a.json();console.log(b);const c=form.querySelectorAll("input, select");c.forEach(a=>{const c=a.name.split(".");let d=b;for(let b=0;b<c.length;b++)d=d[c[b]];a.value=d});const d=document.querySelector("#overlay");d.classList.add("hidden");const e=document.querySelector("#loading");e.classList.add("hidden")}catch(a){console.log("get config",JSON.stringify(a,null,2));const b=document.querySelector("#loading");b.classList.add("hidden");const c=document.querySelector("#error");c.classList.remove("hidden")}};window.addEventListener("load",getConfig);const showPassword=a=>{a.preventDefault();const b=a.target.previousElementSibling;b.type="password"===b.type?"text":"password";const c=a.target;c.classList.toggle("show")};document.querySelectorAll(".show-password").forEach(a=>{a.addEventListener("click",showPassword)});
+        </script>
+    </body>
+</html>

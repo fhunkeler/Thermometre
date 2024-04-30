@@ -3,6 +3,12 @@
 
 ConfigurationStorage::ConfigurationStorage()
 {
+  Serial.begin(115200);
+  DEBUG_PRINT("ConfigurationStorage::ConfigurationStorage()");
+  if (!LittleFS.begin())
+  {
+    DEBUG_PRINT("Failed to start LittleFS");
+  }
 }
 /**
  * @brief Construct a new Configuration Storage:: Configuration Storage object
@@ -12,7 +18,7 @@ ConfigurationStorage::ConfigurationStorage()
 ConfigurationStorage::ConfigurationStorage(char *file)
 {
   Serial.begin(115200);
-  Serial.println("ConfigurationStorage::ConfigurationStorage(" + String(file) + ")");
+  DEBUG_PRINT("ConfigurationStorage::ConfigurationStorage(" + String(file) + ")");
   configPath = file;
   if (LittleFS.begin() && LittleFS.exists(configPath))
   {
@@ -26,16 +32,14 @@ ConfigurationStorage::ConfigurationStorage(char *file)
     DeserializationError error = deserializeJson(configDoc, configFile);
     if (error)
     {
-      Serial.println("Failed to parse configuration file");
+      DEBUG_PRINT(F("Failed to parse configuration file"));
       ESP.restart();
     }
-    Serial.println("Configuration file parsed");
-    // serializeJsonPretty(configDoc, Serial);
-    // Serial.println();
+    DEBUG_PRINT(F("Configuration file parsed"));
   }
   else
   {
-    Serial.println("Configuration file does not exist");
+    DEBUG_PRINT(F("Configuration file does not exist"));
     createConfigFile();
   }
 }
@@ -47,8 +51,8 @@ ConfigurationStorage::ConfigurationStorage(char *file)
  */
 JsonDocument ConfigurationStorage::get()
 {
-  Serial.println("ConfigurationStorage::get()");
-  serializeJsonPretty(configDoc, Serial);
+  DEBUG_PRINT(F("ConfigurationStorage::get()"));
+  DEBUG_PRINT_JSON(configDoc, Serial);
   return configDoc;
 }
 
@@ -59,8 +63,9 @@ JsonDocument ConfigurationStorage::get()
  */
 bool ConfigurationStorage::set(JsonDocument doc)
 {
-  Serial.println("ConfigurationStorage::set()");
+  DEBUG_PRINT(F("ConfigurationStorage::set()"));
   configDoc = doc;
+  DEBUG_PRINT_JSON(configDoc, Serial);
   return writeConfigFile();
 }
 
@@ -70,15 +75,24 @@ bool ConfigurationStorage::set(JsonDocument doc)
  */
 bool ConfigurationStorage::writeConfigFile()
 {
-  Serial.println("ConfigurationStorage::writeConfigFile()");
-  LittleFS.remove(configPath);
+  DEBUG_PRINT(F("ConfigurationStorage::writeConfigFile()"));
+  String deviceId = getDeviceId();
+  configDoc["deviceId"] = deviceId;
   File configFile = LittleFS.open(configPath, "w");
+
   if (!configFile)
   {
-    Serial.println("Failed to open configuration file");
+    DEBUG_PRINT(F("Failed to open configuration file"));
+    configFile.close();
     return false;
   }
-  serializeJson(configDoc, configFile);
+  if (serializeJson(configDoc, configFile) == 0)
+  {
+    DEBUG_PRINT(F("Failed to write file"));
+    configFile.close();
+    return false;
+  }
+  DEBUG_PRINT("Config file wrote");
   configFile.close();
   return true;
 }
@@ -91,13 +105,7 @@ bool ConfigurationStorage::writeConfigFile()
  */
 bool ConfigurationStorage::createConfigFile()
 {
-  Serial.println("ConfigurationStorage::createConfigFile()");
-  if (!LittleFS.begin())
-  {
-    Serial.println("LittleFS Mount Failed");
-    return false;
-  }
-  // LittleFS.format();
+  DEBUG_PRINT(F("ConfigurationStorage::createConfigFile()"));
   File configFile = LittleFS.open(configPath, "w");
   if (!configFile)
   {
@@ -115,11 +123,10 @@ bool ConfigurationStorage::createConfigFile()
   configDoc["mqtt"]["password"] = "password";
   configDoc["mqtt"]["topic"] = "topic";
   configDoc["mqtt"]["id"] = "thermometer_" + deviceId;
-  Serial.println("Configuration file created : ");
-  serializeJsonPretty(configDoc, Serial);
-  serializeJson(configDoc, configFile);
-  configFile.close();
-  return true;
+  DEBUG_PRINT(F("Configuration file created : "));
+  DEBUG_PRINT_JSON(configDoc, Serial);
+
+  return writeConfigFile();
 }
 
 /**
@@ -129,7 +136,7 @@ bool ConfigurationStorage::createConfigFile()
  */
 String ConfigurationStorage::getDeviceId()
 {
-  Serial.println("ConfigurationStorage::getDeviceId()");
+  DEBUG_PRINT(F("ConfigurationStorage::getDeviceId()"));
   String deviceId = "";
   for (size_t i = 0; i < UniqueIDsize; i++)
   {
